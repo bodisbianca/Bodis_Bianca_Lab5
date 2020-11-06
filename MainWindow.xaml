@@ -1,0 +1,46 @@
+﻿<Window x:Name="frmMain" x:Class="Bodis_Bianca_Lab5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bodis_Bianca_Lab5"
+        mc:Ignorable="d"
+        Title="Phone Subscribers Management" Height="450" Width="800" Loaded="frmMain_Loaded">
+    <Window.Resources>
+        <DataTemplate x:Key="PhoneNumbersTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Phonenum}" Grid.Column="0"/>
+                <TextBlock Text="{Binding Subscriber}" Grid.Column="1"/>
+                <TextBlock Text="{Binding Contract_value}" Grid.Column="2"/>
+                <TextBlock Text="{Binding Contract_date}" Grid.Column="3"/>
+            </Grid>
+        </DataTemplate>
+        <local:PhoneNumbersDataSet x:Key="phoneNumbersDataSet"/>
+        <CollectionViewSource x:Key="phoneNumbersViewSource" Source="{Binding PhoneNumbers, Source={StaticResource phoneNumbersDataSet}}"/>
+    </Window.Resources>
+    <Grid x:Name="grdMain" Loaded="grdMain_Loaded">
+        <Button x:Name="btnNew" Content="New" Click="btnNew_Click" HorizontalAlignment="Left" Height="26" Margin="65,58,0,0" VerticalAlignment="Top" Width="101"/>
+        <Button x:Name="btnEdit" Content="Edit" Click="btnEdit_Click" HorizontalAlignment="Left" Height="26" Margin="65,114,0,0" VerticalAlignment="Top" Width="101"/>
+        <Button x:Name="btnDelete" Content="Delete" Click="btnDelete_Click" HorizontalAlignment="Left" Height="26" Margin="65,168,0,0" VerticalAlignment="Top" Width="101"/>
+        <Button x:Name="btnSave" Content="Save" Click="btnSave_Click" HorizontalAlignment="Left" Height="26" Margin="305,373,0,0" VerticalAlignment="Top" Width="101" IsEnabled="False"/>
+        <Button x:Name="btnCancel" Content="Cancel" Click="btnCancel_Click" HorizontalAlignment="Left" Height="26" Margin="652,373,0,0" VerticalAlignment="Top" Width="101" IsEnabled="False"/>
+        <ListBox x:Name="lstPhones" HorizontalAlignment="Left" Height="169" Margin="305,25,0,0" VerticalAlignment="Top" Width="448" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{StaticResource ResourceKey=PhoneNumbersTemplate}"/>
+        <Button x:Name="btnExit" Content="Exit" Click="btnExit_Click" HorizontalAlignment="Left" Height="42" Margin="65,229,0,0" VerticalAlignment="Top" Width="101" FontWeight="Bold"/>
+        <Button x:Name="btnNext" Content="Next" Click="btnNext_Click" HorizontalAlignment="Left" Height="26" Margin="652,199,0,0" VerticalAlignment="Top" Width="101" FontWeight="Normal"/>
+        <Button x:Name="btnPrevious" Content="Previous" Click="btnPrevious_Click" HorizontalAlignment="Left" Height="26" Margin="305,199,0,0" VerticalAlignment="Top" Width="101" FontWeight="Normal"/>
+        <Label x:Name="lblPhoneNum" Content="PhoneNumber:" HorizontalAlignment="Left" Height="25" Margin="324,237,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label x:Name="lblSubscriber" Content="Subscriber:" HorizontalAlignment="Left" Height="24" Margin="324,267,0,0" VerticalAlignment="Top" Width="101"/>
+        <TextBox x:Name="txtPhoneNumber" HorizontalAlignment="Left" Height="24" Margin="432,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" IsEnabled="False" Text="{Binding Path=Phonenum}"/>
+        <TextBox x:Name="txtSubscriber" HorizontalAlignment="Left" Height="25" Margin="432,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" IsEnabled="False" Text="{Binding Path=Subscriber}"/>
+        <Label x:Name="lblContractValue" Content="Contract value:" HorizontalAlignment="Left" Height="24" Margin="324,296,0,0" VerticalAlignment="Top" Width="101"/>
+        <TextBox x:Name="txtContractValue" HorizontalAlignment="Left" Height="26" Margin="432,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" IsEnabled="False" Text="{Binding Path=Contract_value}"/>
+        <Label x:Name="lblContractDate" Content="Contract date:" HorizontalAlignment="Left" Height="24" Margin="324,329,0,0" VerticalAlignment="Top" Width="101"/>
+        <TextBox x:Name="txtContractDate" HorizontalAlignment="Left" Height="26" Margin="432,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" IsEnabled="False" Text="{Binding Path=Contract_date}"/>
+    </Grid>
+</Window>
